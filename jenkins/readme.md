@@ -2,7 +2,7 @@
 
 ## Steps
 
-### 1 - Build New Docker Image on every ush to github repo
+### 1 - Build New Docker Image on every push to github repo
 
 -  Create a pipeline 
 -  Choose build trigger (poll SCM) and add * * * * * (for checking changes every min)
