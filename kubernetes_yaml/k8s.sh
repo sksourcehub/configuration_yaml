@@ -20,6 +20,7 @@ cd ../pgadmin
 # run after ingress is up and running
 kubectl apply -f .
 
+# ingress
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
 
