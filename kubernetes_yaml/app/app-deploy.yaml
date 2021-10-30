@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shpl-app
+spec:
+  selector:
+    matchLabels:
+      app: shpl-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shpl-app
+    spec:
+      containers:
+      - name: shpl-app
+        image: sksourcehub/sh-app:latest
+        command: ['python', 'manage.py' , 'runserver' , '0.0.0.0:9000']
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+        env:
+        - name: POSTGRES_PASSWORD
+          value: root
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_DATABASE_IP
+          value: pgpool-svc
+        - name: REDIS_HOST
+          value: redis-svc
+        - name: REDIS_PORT
+          value: '6379'
+        - name: WAMP_SERVER
+          value: ws://crossbar.mydomain.com/ws
+        - name: CELERY_RESULT_BACKED_HOST
+          value: pgpool-svc
+        - name: CELERY_RESULT_BACKED_PORT
+          value: "5432"
+        volumeMounts:
+        - name: app-volume
+          mountPath: /home/app_data
+      imagePullSecrets:
+      - name: registrykey
+      volumes:
+      - name: app-volume
+        persistentVolumeClaim:
+          claimName: app-pv-claim

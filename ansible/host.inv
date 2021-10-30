@@ -1,0 +1,2 @@
+[webservers]
+<IP ADDRESS> ansible_ssh_pass=<SSH_PASS> ansible_ssh_user=<SSH_USER> ansible_sudo_pass=<SUDO_PASS>

@@ -1,0 +1,12 @@
+- hosts: webservers
+  become: yes
+  become_method: sudo    
+  tasks:
+    - name: apply
+      command: kubectl apply -f /path/to/app/deploy/yaml
+    - name: reload
+      command: kubectl rollout restart deployment.apps/<DEPLOYMENT_NAME>
+    - name: apply-celery
+      command: kubectl apply -f /path/to/celery/deploy/yaml
+    - name: reload-celery 
+      command: kubectl rollout restart deployment.apps/<DESPLOYMENT_NAME>

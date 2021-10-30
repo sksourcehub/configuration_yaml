@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crossbar
+  labels:
+    deployment: crossbar
+spec:
+  selector:
+    matchLabels:
+      pod: crossbar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pod: crossbar
+    spec:
+      containers:
+      - name: crossbar
+        image: sksourcehub/crossbar:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080

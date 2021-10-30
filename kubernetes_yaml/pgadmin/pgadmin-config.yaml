@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: pgadmin-config
+data:
+ servers.json: |
+   {
+       "Servers": {
+         "1": {
+           "Name": "db",
+           "Group": "Servers",
+           "Port": 5432,
+           "Username": "postgres",
+           "Host": "pgpool-svc",
+           "SSLMode": "prefer",
+           "MaintenanceDB": "postgres"
+         }
+       }
+   }
